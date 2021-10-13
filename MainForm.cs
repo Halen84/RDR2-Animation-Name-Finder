@@ -103,8 +103,11 @@ namespace RDR2AnimationNameFinder
 		{
 			ContextMenu indexContextMenu = new ContextMenu();
 
-			MenuItem deleteItem = indexContextMenu.MenuItems.Add("Copy");
-			deleteItem.Click += new EventHandler(CopyItem_Click);
+			MenuItem copy = indexContextMenu.MenuItems.Add("Copy");
+			copy.Click += new EventHandler(CopyItem_Click);
+			MenuItem copy2 = indexContextMenu.MenuItems.Add("Copy as array element");
+			copy2.Click += new EventHandler(CopyAsArrayElement_Click);
+
 			animationList.ContextMenu = indexContextMenu;
 			indexContextMenu.Show(animationList, animationList.PointToClient(Cursor.Position));
 		}
@@ -114,7 +117,31 @@ namespace RDR2AnimationNameFinder
 			string item = "";
 			for (int i = 0; i < animationList.SelectedItems.Count; i++)
 			{
-				item += animationList.SelectedItems[i].ToString() + "\n";
+				if (i + 1 == animationList.SelectedItems.Count)
+				{
+					// Dont add a newline if item is last
+					item += animationList.SelectedItems[i].ToString();
+				} else
+				{
+					item += animationList.SelectedItems[i].ToString() + "\n";
+				}
+			}
+			Clipboard.SetText(item);
+		}
+
+		private void CopyAsArrayElement_Click(object sender, EventArgs e)
+		{
+			string item = "";
+			for (int i = 0; i < animationList.SelectedItems.Count; i++)
+			{
+				if (i + 1 == animationList.SelectedItems.Count)
+				{
+					// Dont add a comma if item is last
+					item += $"\"{animationList.SelectedItems[i].ToString()}\"";
+				} else
+				{
+					item += $"\"{animationList.SelectedItems[i].ToString()}\", ";
+				}
 			}
 			Clipboard.SetText(item);
 		}
@@ -134,27 +161,34 @@ namespace RDR2AnimationNameFinder
 
 			void write()
 			{
-				using (StreamWriter sw = File.CreateText(file))
+				try
 				{
-					sw.WriteLine(fileName);
-					sw.WriteLine("\n");
-					for (int i = 0; i < animationList.Items.Count; i++)
+					using (StreamWriter sw = File.CreateText(file))
 					{
-						sw.WriteLine(animationList.Items[i].ToString());
-					}
+						sw.WriteLine(fileName);
+						sw.WriteLine("\n");
+						for (int i = 0; i < animationList.Items.Count; i++)
+						{
+							sw.WriteLine(animationList.Items[i].ToString());
+						}
 
-					DialogResult result = MessageBox.Show("Successfully exported file. Would you like to open file location?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-					if (result == DialogResult.Yes)
-					{
-						try
+						DialogResult result = MessageBox.Show("Successfully exported file. Would you like to open file location?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+						if (result == DialogResult.Yes)
 						{
-							Process.Start(Path.GetDirectoryName(file.Replace(".txt", "")));
-						}
-						catch (Exception ex)
-						{
-							MessageBox.Show($"Unable to open file location:\n\n{ex.ToString()}");
+							try
+							{
+								Process.Start(Path.GetDirectoryName(file.Replace(".txt", "")));
+							}
+							catch (Exception ex)
+							{
+								MessageBox.Show($"Unable to open file location:\n\n{ex.ToString()}");
+							}
 						}
 					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show($"There was an error while processing the file:\n\n{ex.ToString()}");
 				}
 			}
 

@@ -36,6 +36,8 @@ namespace RDR2AnimationNameFinder
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -98,18 +100,43 @@ namespace RDR2AnimationNameFinder
 			// 
 			// label7
 			// 
+			this.label7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(12, 258);
+			this.label7.Location = new System.Drawing.Point(162, 256);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(217, 13);
 			this.label7.TabIndex = 6;
 			this.label7.Text = "RDR2 Animation Name Finder by TuffyTown";
+			// 
+			// label8
+			// 
+			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(493, 255);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(47, 13);
+			this.label8.TabIndex = 7;
+			this.label8.Text = "[version]";
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.linkLabel1.AutoSize = true;
+			this.linkLabel1.Location = new System.Drawing.Point(2, 255);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(40, 13);
+			this.linkLabel1.TabIndex = 8;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "GitHub";
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
 			// 
 			// HelpForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(542, 271);
+			this.Controls.Add(this.linkLabel1);
+			this.Controls.Add(this.label8);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label5);
@@ -135,5 +162,7 @@ namespace RDR2AnimationNameFinder
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.LinkLabel linkLabel1;
 	}
 }
