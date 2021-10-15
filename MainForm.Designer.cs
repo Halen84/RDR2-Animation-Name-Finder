@@ -44,12 +44,10 @@ namespace RDR2AnimationNameFinder
 			// 
 			// loadButton
 			// 
-			this.loadButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.loadButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.loadButton.Location = new System.Drawing.Point(115, 386);
+			this.loadButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.loadButton.Location = new System.Drawing.Point(135, 386);
 			this.loadButton.Name = "loadButton";
-			this.loadButton.Size = new System.Drawing.Size(111, 23);
+			this.loadButton.Size = new System.Drawing.Size(91, 23);
 			this.loadButton.TabIndex = 1;
 			this.loadButton.Text = "Load Dictionary";
 			this.toolTip1.SetToolTip(this.loadButton, "Load dictionaries such as expressions, animations, and clips");
@@ -86,13 +84,11 @@ namespace RDR2AnimationNameFinder
 			// 
 			// exportToFile
 			// 
-			this.exportToFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.exportToFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.exportToFile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.exportToFile.Enabled = false;
-			this.exportToFile.Location = new System.Drawing.Point(235, 386);
+			this.exportToFile.Location = new System.Drawing.Point(232, 386);
 			this.exportToFile.Name = "exportToFile";
-			this.exportToFile.Size = new System.Drawing.Size(111, 23);
+			this.exportToFile.Size = new System.Drawing.Size(91, 23);
 			this.exportToFile.TabIndex = 4;
 			this.exportToFile.Text = "Export To File";
 			this.toolTip1.SetToolTip(this.exportToFile, "Export names to a txt file");
@@ -101,6 +97,7 @@ namespace RDR2AnimationNameFinder
 			// 
 			// refresh
 			// 
+			this.refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.refresh.Location = new System.Drawing.Point(388, 9);
 			this.refresh.Name = "refresh";
 			this.refresh.Size = new System.Drawing.Size(58, 23);

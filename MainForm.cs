@@ -24,9 +24,9 @@ namespace RDR2AnimationNameFinder
 			animationList.Items.Clear();
 			parsedAnims.Clear();
 
-			if (Properties.Settings.Default.matchAnim) { SearchForMatches("anim"); }
-			if (Properties.Settings.Default.matchClip) { SearchForMatches("clip"); }
-			if (Properties.Settings.Default.matchExpr) { SearchForMatches("expr"); }
+			if (Properties.Settings.Default.file_matchAnim) { SearchForMatches("anim"); }
+			if (Properties.Settings.Default.file_matchClip) { SearchForMatches("clip"); }
+			if (Properties.Settings.Default.file_matchExpr) { SearchForMatches("expr"); }
 			parsedAnims.Sort();
 
 			if (parsedAnims.Count == 0)
@@ -52,7 +52,7 @@ namespace RDR2AnimationNameFinder
 			Cursor.Current = Cursors.WaitCursor;
 			foreach (Match match in rx.Matches(fileContents))
 			{
-				if (Properties.Settings.Default.keepFileType)
+				if (Properties.Settings.Default.misc_showFileType)
 				{
 					// Remove "pack:/" before adding to the list.
 					parsedAnims.Add(match.Value.Replace("pack:/", ""));
@@ -99,6 +99,7 @@ namespace RDR2AnimationNameFinder
 			}
 		}
 
+		#region Context Menu Handling
 		private void CreateContextMenu()
 		{
 			ContextMenu indexContextMenu = new ContextMenu();
@@ -115,15 +116,24 @@ namespace RDR2AnimationNameFinder
 		private void CopyItem_Click(object sender, EventArgs e)
 		{
 			string item = "";
+			bool includeFileType = Properties.Settings.Default.misc_includeFileTypeInCopy;
+
 			for (int i = 0; i < animationList.SelectedItems.Count; i++)
 			{
 				if (i + 1 == animationList.SelectedItems.Count)
 				{
 					// Dont add a newline if item is last
-					item += animationList.SelectedItems[i].ToString();
-				} else
+					if (includeFileType)
+						item += animationList.SelectedItems[i].ToString();
+					else
+						item += animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5);
+				}
+				else
 				{
-					item += animationList.SelectedItems[i].ToString() + "\n";
+					if (includeFileType)
+						item += animationList.SelectedItems[i].ToString() + "\n";
+					else
+						item += animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5) + "\n";
 				}
 			}
 			Clipboard.SetText(item);
@@ -132,15 +142,24 @@ namespace RDR2AnimationNameFinder
 		private void CopyAsArrayElement_Click(object sender, EventArgs e)
 		{
 			string item = "";
+			bool includeFileType = Properties.Settings.Default.misc_includeFileTypeInCopy;
+
 			for (int i = 0; i < animationList.SelectedItems.Count; i++)
 			{
 				if (i + 1 == animationList.SelectedItems.Count)
 				{
 					// Dont add a comma if item is last
-					item += $"\"{animationList.SelectedItems[i].ToString()}\"";
-				} else
+					if (includeFileType)
+						item += $"\"{animationList.SelectedItems[i].ToString()}\"";
+					else
+						item += $"\"{animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5)}\"";
+				}
+				else
 				{
-					item += $"\"{animationList.SelectedItems[i].ToString()}\", ";
+					if (includeFileType)
+						item += $"\"{animationList.SelectedItems[i].ToString()}\", ";
+					else
+						item += $"\"{animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5)}\", ";
 				}
 			}
 			Clipboard.SetText(item);
@@ -153,11 +172,14 @@ namespace RDR2AnimationNameFinder
 				CreateContextMenu();
 			}
 		}
+		#endregion
 
 		private void exportToFile_Click(object sender, EventArgs e)
 		{
 			string fileName = Path.GetFileName(path);
 			string file = path + ".txt";
+			bool includeFileType = Properties.Settings.Default.export_includeTypeInExport;
+			bool exportAsArray = Properties.Settings.Default.export_exportAsArray;
 
 			void write()
 			{
@@ -169,7 +191,31 @@ namespace RDR2AnimationNameFinder
 						sw.WriteLine("\n");
 						for (int i = 0; i < animationList.Items.Count; i++)
 						{
-							sw.WriteLine(animationList.Items[i].ToString());
+							if (includeFileType && exportAsArray)
+							{
+								if (i + 1 == animationList.Items.Count)
+									sw.Write("\"" + animationList.Items[i].ToString() + "\"");
+								else
+									sw.Write("\"" + animationList.Items[i].ToString() + "\", ");
+							}
+
+							else if (includeFileType && !exportAsArray)
+							{
+								sw.WriteLine(animationList.Items[i].ToString());
+							}
+
+							else if (!includeFileType && exportAsArray)
+							{
+								if (i + 1 == animationList.Items.Count)
+									sw.Write("\"" + animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5) + "\"");
+								else
+									sw.Write("\"" + animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5) + "\", ");
+							}
+
+							else if (!includeFileType && !exportAsArray)
+							{
+								sw.WriteLine(animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5));
+							}
 						}
 
 						DialogResult result = MessageBox.Show("Successfully exported file. Would you like to open file location?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);

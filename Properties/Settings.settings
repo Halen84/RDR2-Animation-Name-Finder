@@ -1,18 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RDR2AnimationNameGetter.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RDR2AnimationNameFinder.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="matchAnim" Type="System.Boolean" Scope="User">
+    <Setting Name="file_matchAnim" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="matchClip" Type="System.Boolean" Scope="User">
+    <Setting Name="file_matchClip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="matchExpr" Type="System.Boolean" Scope="User">
+    <Setting Name="file_matchExpr" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="keepFileType" Type="System.Boolean" Scope="User">
+    <Setting Name="misc_showFileType" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="export_includeTypeInExport" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="export_exportAsArray" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="misc_includeFileTypeInCopy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

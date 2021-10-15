@@ -26,48 +26,84 @@ namespace RDR2AnimationNameFinder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool matchAnim {
+        public bool file_matchAnim {
             get {
-                return ((bool)(this["matchAnim"]));
+                return ((bool)(this["file_matchAnim"]));
             }
             set {
-                this["matchAnim"] = value;
+                this["file_matchAnim"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool matchClip {
+        public bool file_matchClip {
             get {
-                return ((bool)(this["matchClip"]));
+                return ((bool)(this["file_matchClip"]));
             }
             set {
-                this["matchClip"] = value;
+                this["file_matchClip"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool matchExpr {
+        public bool file_matchExpr {
             get {
-                return ((bool)(this["matchExpr"]));
+                return ((bool)(this["file_matchExpr"]));
             }
             set {
-                this["matchExpr"] = value;
+                this["file_matchExpr"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool keepFileType {
+        public bool misc_showFileType {
             get {
-                return ((bool)(this["keepFileType"]));
+                return ((bool)(this["misc_showFileType"]));
             }
             set {
-                this["keepFileType"] = value;
+                this["misc_showFileType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool export_includeTypeInExport {
+            get {
+                return ((bool)(this["export_includeTypeInExport"]));
+            }
+            set {
+                this["export_includeTypeInExport"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool export_exportAsArray {
+            get {
+                return ((bool)(this["export_exportAsArray"]));
+            }
+            set {
+                this["export_exportAsArray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool misc_includeFileTypeInCopy {
+            get {
+                return ((bool)(this["misc_includeFileTypeInCopy"]));
+            }
+            set {
+                this["misc_includeFileTypeInCopy"] = value;
             }
         }
     }

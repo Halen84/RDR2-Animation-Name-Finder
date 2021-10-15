@@ -30,88 +30,189 @@ namespace RDR2AnimationNameFinder
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.mAnim = new System.Windows.Forms.CheckBox();
-			this.mClip = new System.Windows.Forms.CheckBox();
-			this.mExpr = new System.Windows.Forms.CheckBox();
+			this.file_matchAnim = new System.Windows.Forms.CheckBox();
+			this.file_matchClip = new System.Windows.Forms.CheckBox();
+			this.file_matchExpr = new System.Windows.Forms.CheckBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.keepFileType = new System.Windows.Forms.CheckBox();
+			this.misc_showFileType = new System.Windows.Forms.CheckBox();
+			this.fileTypesGB = new System.Windows.Forms.GroupBox();
+			this.exportGB = new System.Windows.Forms.GroupBox();
+			this.export_exportAsArray = new System.Windows.Forms.CheckBox();
+			this.export_includeTypeInExport = new System.Windows.Forms.CheckBox();
+			this.miscGB = new System.Windows.Forms.GroupBox();
+			this.misc_includeFileTypeInCopy = new System.Windows.Forms.CheckBox();
+			this.fileTypesGB.SuspendLayout();
+			this.exportGB.SuspendLayout();
+			this.miscGB.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// mAnim
+			// file_matchAnim
 			// 
-			this.mAnim.AutoSize = true;
-			this.mAnim.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-			this.mAnim.Location = new System.Drawing.Point(12, 12);
-			this.mAnim.Name = "mAnim";
-			this.mAnim.Size = new System.Drawing.Size(94, 19);
-			this.mAnim.TabIndex = 0;
-			this.mAnim.Text = "Match .anim";
-			this.toolTip1.SetToolTip(this.mAnim, "Choose whether to match .anim files in dictionaries");
-			this.mAnim.UseVisualStyleBackColor = true;
-			this.mAnim.CheckedChanged += new System.EventHandler(this.mAnim_CheckedChanged);
+			this.file_matchAnim.AutoSize = true;
+			this.file_matchAnim.Checked = true;
+			this.file_matchAnim.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.file_matchAnim.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+			this.file_matchAnim.Location = new System.Drawing.Point(6, 19);
+			this.file_matchAnim.Name = "file_matchAnim";
+			this.file_matchAnim.Size = new System.Drawing.Size(84, 17);
+			this.file_matchAnim.TabIndex = 0;
+			this.file_matchAnim.Text = "Match .anim";
+			this.toolTip1.SetToolTip(this.file_matchAnim, "Choose whether to match .anim files in dictionaries");
+			this.file_matchAnim.UseVisualStyleBackColor = true;
+			this.file_matchAnim.CheckedChanged += new System.EventHandler(this.file_matchAnim_CheckedChanged);
 			// 
-			// mClip
+			// file_matchClip
 			// 
-			this.mClip.AutoSize = true;
-			this.mClip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-			this.mClip.Location = new System.Drawing.Point(12, 35);
-			this.mClip.Name = "mClip";
-			this.mClip.Size = new System.Drawing.Size(85, 19);
-			this.mClip.TabIndex = 1;
-			this.mClip.Text = "Match .clip";
-			this.toolTip1.SetToolTip(this.mClip, "Choose whether to match .clip files in dictionaries");
-			this.mClip.UseVisualStyleBackColor = true;
-			this.mClip.CheckedChanged += new System.EventHandler(this.mClip_CheckedChanged);
+			this.file_matchClip.AutoSize = true;
+			this.file_matchClip.Checked = true;
+			this.file_matchClip.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.file_matchClip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+			this.file_matchClip.Location = new System.Drawing.Point(6, 42);
+			this.file_matchClip.Name = "file_matchClip";
+			this.file_matchClip.Size = new System.Drawing.Size(78, 17);
+			this.file_matchClip.TabIndex = 1;
+			this.file_matchClip.Text = "Match .clip";
+			this.toolTip1.SetToolTip(this.file_matchClip, "Choose whether to match .clip files in dictionaries");
+			this.file_matchClip.UseVisualStyleBackColor = true;
+			this.file_matchClip.CheckedChanged += new System.EventHandler(this.file_matchClip_CheckedChanged);
 			// 
-			// mExpr
+			// file_matchExpr
 			// 
-			this.mExpr.AutoSize = true;
-			this.mExpr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-			this.mExpr.Location = new System.Drawing.Point(12, 58);
-			this.mExpr.Name = "mExpr";
-			this.mExpr.Size = new System.Drawing.Size(90, 19);
-			this.mExpr.TabIndex = 2;
-			this.mExpr.Text = "Match .expr";
-			this.toolTip1.SetToolTip(this.mExpr, "Choose whether to match .expr files in dictionaries");
-			this.mExpr.UseVisualStyleBackColor = true;
-			this.mExpr.CheckedChanged += new System.EventHandler(this.mExpr_CheckedChanged);
+			this.file_matchExpr.AutoSize = true;
+			this.file_matchExpr.Checked = true;
+			this.file_matchExpr.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.file_matchExpr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+			this.file_matchExpr.Location = new System.Drawing.Point(6, 65);
+			this.file_matchExpr.Name = "file_matchExpr";
+			this.file_matchExpr.Size = new System.Drawing.Size(82, 17);
+			this.file_matchExpr.TabIndex = 2;
+			this.file_matchExpr.Text = "Match .expr";
+			this.toolTip1.SetToolTip(this.file_matchExpr, "Choose whether to match .expr files in dictionaries");
+			this.file_matchExpr.UseVisualStyleBackColor = true;
+			this.file_matchExpr.CheckedChanged += new System.EventHandler(this.file_matchExpr_CheckedChanged);
 			// 
-			// keepFileType
+			// misc_showFileType
 			// 
-			this.keepFileType.AutoSize = true;
-			this.keepFileType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-			this.keepFileType.Location = new System.Drawing.Point(12, 81);
-			this.keepFileType.Name = "keepFileType";
-			this.keepFileType.Size = new System.Drawing.Size(110, 19);
-			this.keepFileType.TabIndex = 3;
-			this.keepFileType.Text = "Include file type";
-			this.toolTip1.SetToolTip(this.keepFileType, "Show file type in entry list");
-			this.keepFileType.UseVisualStyleBackColor = true;
-			this.keepFileType.CheckedChanged += new System.EventHandler(this.keepFileType_CheckedChanged);
+			this.misc_showFileType.AutoSize = true;
+			this.misc_showFileType.Checked = true;
+			this.misc_showFileType.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.misc_showFileType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+			this.misc_showFileType.Location = new System.Drawing.Point(6, 19);
+			this.misc_showFileType.Name = "misc_showFileType";
+			this.misc_showFileType.Size = new System.Drawing.Size(92, 17);
+			this.misc_showFileType.TabIndex = 3;
+			this.misc_showFileType.Text = "Show file type";
+			this.toolTip1.SetToolTip(this.misc_showFileType, "Show file type in entry list");
+			this.misc_showFileType.UseVisualStyleBackColor = true;
+			this.misc_showFileType.CheckedChanged += new System.EventHandler(this.misc_showFileType_CheckedChanged);
+			// 
+			// fileTypesGB
+			// 
+			this.fileTypesGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.fileTypesGB.Controls.Add(this.file_matchAnim);
+			this.fileTypesGB.Controls.Add(this.file_matchClip);
+			this.fileTypesGB.Controls.Add(this.file_matchExpr);
+			this.fileTypesGB.Location = new System.Drawing.Point(12, 5);
+			this.fileTypesGB.Name = "fileTypesGB";
+			this.fileTypesGB.Size = new System.Drawing.Size(204, 89);
+			this.fileTypesGB.TabIndex = 4;
+			this.fileTypesGB.TabStop = false;
+			this.fileTypesGB.Text = "File Types";
+			// 
+			// exportGB
+			// 
+			this.exportGB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.exportGB.Controls.Add(this.export_exportAsArray);
+			this.exportGB.Controls.Add(this.export_includeTypeInExport);
+			this.exportGB.Location = new System.Drawing.Point(12, 100);
+			this.exportGB.Name = "exportGB";
+			this.exportGB.Size = new System.Drawing.Size(204, 66);
+			this.exportGB.TabIndex = 5;
+			this.exportGB.TabStop = false;
+			this.exportGB.Text = "Export Settings";
+			// 
+			// export_exportAsArray
+			// 
+			this.export_exportAsArray.AutoSize = true;
+			this.export_exportAsArray.Location = new System.Drawing.Point(6, 42);
+			this.export_exportAsArray.Name = "export_exportAsArray";
+			this.export_exportAsArray.Size = new System.Drawing.Size(141, 17);
+			this.export_exportAsArray.TabIndex = 7;
+			this.export_exportAsArray.Text = "Export as array elements";
+			this.export_exportAsArray.UseVisualStyleBackColor = true;
+			this.export_exportAsArray.CheckedChanged += new System.EventHandler(this.export_exportAsArray_CheckedChanged);
+			// 
+			// export_includeTypeInExport
+			// 
+			this.export_includeTypeInExport.AutoSize = true;
+			this.export_includeTypeInExport.Checked = true;
+			this.export_includeTypeInExport.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.export_includeTypeInExport.Location = new System.Drawing.Point(6, 19);
+			this.export_includeTypeInExport.Name = "export_includeTypeInExport";
+			this.export_includeTypeInExport.Size = new System.Drawing.Size(143, 17);
+			this.export_includeTypeInExport.TabIndex = 6;
+			this.export_includeTypeInExport.Text = "Include file type in export";
+			this.export_includeTypeInExport.UseVisualStyleBackColor = true;
+			this.export_includeTypeInExport.CheckedChanged += new System.EventHandler(this.export_includeTypeInExport_CheckedChanged);
+			// 
+			// miscGB
+			// 
+			this.miscGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.miscGB.Controls.Add(this.misc_includeFileTypeInCopy);
+			this.miscGB.Controls.Add(this.misc_showFileType);
+			this.miscGB.Location = new System.Drawing.Point(12, 172);
+			this.miscGB.Name = "miscGB";
+			this.miscGB.Size = new System.Drawing.Size(204, 66);
+			this.miscGB.TabIndex = 6;
+			this.miscGB.TabStop = false;
+			this.miscGB.Text = "Miscellaneous";
+			// 
+			// misc_includeFileTypeInCopy
+			// 
+			this.misc_includeFileTypeInCopy.AutoSize = true;
+			this.misc_includeFileTypeInCopy.Location = new System.Drawing.Point(6, 42);
+			this.misc_includeFileTypeInCopy.Name = "misc_includeFileTypeInCopy";
+			this.misc_includeFileTypeInCopy.Size = new System.Drawing.Size(137, 17);
+			this.misc_includeFileTypeInCopy.TabIndex = 7;
+			this.misc_includeFileTypeInCopy.Text = "Include file type in copy";
+			this.misc_includeFileTypeInCopy.UseVisualStyleBackColor = true;
+			this.misc_includeFileTypeInCopy.CheckedChanged += new System.EventHandler(this.misc_includeFileTypeInCopy_CheckedChanged);
 			// 
 			// SettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(196, 113);
-			this.Controls.Add(this.keepFileType);
-			this.Controls.Add(this.mExpr);
-			this.Controls.Add(this.mClip);
-			this.Controls.Add(this.mAnim);
+			this.ClientSize = new System.Drawing.Size(228, 246);
+			this.Controls.Add(this.miscGB);
+			this.Controls.Add(this.exportGB);
+			this.Controls.Add(this.fileTypesGB);
 			this.Name = "SettingsForm";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Settings";
+			this.fileTypesGB.ResumeLayout(false);
+			this.fileTypesGB.PerformLayout();
+			this.exportGB.ResumeLayout(false);
+			this.exportGB.PerformLayout();
+			this.miscGB.ResumeLayout(false);
+			this.miscGB.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
-		private System.Windows.Forms.CheckBox mAnim;
-		private System.Windows.Forms.CheckBox mClip;
-		private System.Windows.Forms.CheckBox mExpr;
+		private System.Windows.Forms.CheckBox file_matchAnim;
+		private System.Windows.Forms.CheckBox file_matchClip;
+		private System.Windows.Forms.CheckBox file_matchExpr;
 		private System.Windows.Forms.ToolTip toolTip1;
-		private System.Windows.Forms.CheckBox keepFileType;
+		private System.Windows.Forms.CheckBox misc_showFileType;
+		private System.Windows.Forms.GroupBox fileTypesGB;
+		private System.Windows.Forms.GroupBox exportGB;
+		private System.Windows.Forms.CheckBox export_exportAsArray;
+		private System.Windows.Forms.CheckBox export_includeTypeInExport;
+		private System.Windows.Forms.GroupBox miscGB;
+		private System.Windows.Forms.CheckBox misc_includeFileTypeInCopy;
 	}
 }
