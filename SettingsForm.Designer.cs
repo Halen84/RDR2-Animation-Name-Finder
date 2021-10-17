@@ -41,6 +41,7 @@ namespace RDR2AnimationNameFinder
 			this.export_includeTypeInExport = new System.Windows.Forms.CheckBox();
 			this.miscGB = new System.Windows.Forms.GroupBox();
 			this.misc_includeFileTypeInCopy = new System.Windows.Forms.CheckBox();
+			this.applyChanges = new System.Windows.Forms.Button();
 			this.fileTypesGB.SuspendLayout();
 			this.exportGB.SuspendLayout();
 			this.miscGB.SuspendLayout();
@@ -115,7 +116,7 @@ namespace RDR2AnimationNameFinder
 			this.fileTypesGB.Controls.Add(this.file_matchExpr);
 			this.fileTypesGB.Location = new System.Drawing.Point(12, 5);
 			this.fileTypesGB.Name = "fileTypesGB";
-			this.fileTypesGB.Size = new System.Drawing.Size(204, 89);
+			this.fileTypesGB.Size = new System.Drawing.Size(204, 87);
 			this.fileTypesGB.TabIndex = 4;
 			this.fileTypesGB.TabStop = false;
 			this.fileTypesGB.Text = "File Types";
@@ -125,9 +126,9 @@ namespace RDR2AnimationNameFinder
 			this.exportGB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.exportGB.Controls.Add(this.export_exportAsArray);
 			this.exportGB.Controls.Add(this.export_includeTypeInExport);
-			this.exportGB.Location = new System.Drawing.Point(12, 100);
+			this.exportGB.Location = new System.Drawing.Point(12, 98);
 			this.exportGB.Name = "exportGB";
-			this.exportGB.Size = new System.Drawing.Size(204, 66);
+			this.exportGB.Size = new System.Drawing.Size(204, 64);
 			this.exportGB.TabIndex = 5;
 			this.exportGB.TabStop = false;
 			this.exportGB.Text = "Export Settings";
@@ -162,9 +163,9 @@ namespace RDR2AnimationNameFinder
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.miscGB.Controls.Add(this.misc_includeFileTypeInCopy);
 			this.miscGB.Controls.Add(this.misc_showFileType);
-			this.miscGB.Location = new System.Drawing.Point(12, 172);
+			this.miscGB.Location = new System.Drawing.Point(12, 168);
 			this.miscGB.Name = "miscGB";
-			this.miscGB.Size = new System.Drawing.Size(204, 66);
+			this.miscGB.Size = new System.Drawing.Size(204, 64);
 			this.miscGB.TabIndex = 6;
 			this.miscGB.TabStop = false;
 			this.miscGB.Text = "Miscellaneous";
@@ -180,11 +181,24 @@ namespace RDR2AnimationNameFinder
 			this.misc_includeFileTypeInCopy.UseVisualStyleBackColor = true;
 			this.misc_includeFileTypeInCopy.CheckedChanged += new System.EventHandler(this.misc_includeFileTypeInCopy_CheckedChanged);
 			// 
+			// applyChanges
+			// 
+			this.applyChanges.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.applyChanges.Location = new System.Drawing.Point(76, 236);
+			this.applyChanges.Name = "applyChanges";
+			this.applyChanges.Size = new System.Drawing.Size(75, 23);
+			this.applyChanges.TabIndex = 7;
+			this.applyChanges.Text = "Apply";
+			this.toolTip1.SetToolTip(this.applyChanges, "Apply changes");
+			this.applyChanges.UseVisualStyleBackColor = true;
+			this.applyChanges.Click += new System.EventHandler(this.applyChanges_Click);
+			// 
 			// SettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(228, 246);
+			this.ClientSize = new System.Drawing.Size(228, 265);
+			this.Controls.Add(this.applyChanges);
 			this.Controls.Add(this.miscGB);
 			this.Controls.Add(this.exportGB);
 			this.Controls.Add(this.fileTypesGB);
@@ -214,5 +228,6 @@ namespace RDR2AnimationNameFinder
 		private System.Windows.Forms.CheckBox export_includeTypeInExport;
 		private System.Windows.Forms.GroupBox miscGB;
 		private System.Windows.Forms.CheckBox misc_includeFileTypeInCopy;
+		private System.Windows.Forms.Button applyChanges;
 	}
 }

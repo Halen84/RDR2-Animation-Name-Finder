@@ -19,8 +19,10 @@ namespace RDR2AnimationNameFinder
 			fileNameLabel.Text = "";
 		}
 
-		private void PopulateList()
+		public void PopulateList()
 		{
+			if (string.IsNullOrEmpty(fileContents)) { return; }
+
 			animationList.Items.Clear();
 			parsedAnims.Clear();
 
@@ -38,7 +40,13 @@ namespace RDR2AnimationNameFinder
 			{
 				foreach (string clipName in parsedAnims)
 				{
-					animationList.Items.Add(clipName);
+					if (Properties.Settings.Default.misc_showFileType)
+					{
+						animationList.Items.Add(clipName);
+					} else
+					{
+						animationList.Items.Add(clipName.Replace(".anim", "").Replace(".clip", "").Replace(".expr", ""));
+					}
 				}
 				exportToFile.Enabled = true;
 			}
@@ -49,21 +57,16 @@ namespace RDR2AnimationNameFinder
 			// Use Regex to find animation names
 			Regex rx = new Regex(@"pack:/(.*?)\." + fileType);
 
-			Cursor.Current = Cursors.WaitCursor;
-			foreach (Match match in rx.Matches(fileContents))
+			if (!string.IsNullOrEmpty(fileContents)) // redundant check
 			{
-				if (Properties.Settings.Default.misc_showFileType)
+				Cursor.Current = Cursors.WaitCursor;
+				foreach (Match match in rx.Matches(fileContents))
 				{
-					// Remove "pack:/" before adding to the list.
+					// Remove "pack:/" before adding to list
 					parsedAnims.Add(match.Value.Replace("pack:/", ""));
 				}
-				else
-				{
-					// Remove "pack:/" and fileType before adding to the list.
-					parsedAnims.Add(match.Value.Replace("pack:/", "").Replace($".{fileType}", ""));
-				}
+				Cursor.Current = Cursors.Default;
 			}
-			Cursor.Current = Cursors.Default;
 		}
 
 		private void loadButton_Click(object sender, EventArgs e)
@@ -80,7 +83,7 @@ namespace RDR2AnimationNameFinder
 
 				try
 				{
-					fileContents = File.ReadAllText(path);
+					fileContents = File.ReadAllText(path, System.Text.Encoding.UTF8);
 				} catch (Exception ex)
 				{
 					MessageBox.Show($"Unable to read file:\n\n{ex.ToString()}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,20 +123,22 @@ namespace RDR2AnimationNameFinder
 
 			for (int i = 0; i < animationList.SelectedItems.Count; i++)
 			{
+				int index = animationList.Items.IndexOf(animationList.SelectedItems[i]);
+
 				if (i + 1 == animationList.SelectedItems.Count)
 				{
 					// Dont add a newline if item is last
 					if (includeFileType)
-						item += animationList.SelectedItems[i].ToString();
+						item += parsedAnims[index].ToString();
 					else
-						item += animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5);
+						item += parsedAnims[index].ToString().Substring(0, parsedAnims[index].ToString().Length - 5);
 				}
 				else
 				{
 					if (includeFileType)
-						item += animationList.SelectedItems[i].ToString() + "\n";
+						item += parsedAnims[index].ToString() + "\n";
 					else
-						item += animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5) + "\n";
+						item += parsedAnims[index].ToString().Substring(0, parsedAnims[index].ToString().Length - 5) + "\n";
 				}
 			}
 			Clipboard.SetText(item);
@@ -146,20 +151,22 @@ namespace RDR2AnimationNameFinder
 
 			for (int i = 0; i < animationList.SelectedItems.Count; i++)
 			{
+				int index = animationList.Items.IndexOf(animationList.SelectedItems[i]);
+
 				if (i + 1 == animationList.SelectedItems.Count)
 				{
 					// Dont add a comma if item is last
 					if (includeFileType)
-						item += $"\"{animationList.SelectedItems[i].ToString()}\"";
+						item += $"\"{parsedAnims[index].ToString()}\"";
 					else
-						item += $"\"{animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5)}\"";
+						item += $"\"{parsedAnims[index].ToString().Substring(0, parsedAnims[index].ToString().Length - 5)}\"";
 				}
 				else
 				{
 					if (includeFileType)
-						item += $"\"{animationList.SelectedItems[i].ToString()}\", ";
+						item += $"\"{parsedAnims[index].ToString()}\", ";
 					else
-						item += $"\"{animationList.SelectedItems[i].ToString().Substring(0, animationList.SelectedItems[i].ToString().Length - 5)}\", ";
+						item += $"\"{parsedAnims[index].ToString().Substring(0, parsedAnims[index].ToString().Length - 5)}\", ";
 				}
 			}
 			Clipboard.SetText(item);
@@ -181,40 +188,65 @@ namespace RDR2AnimationNameFinder
 			bool includeFileType = Properties.Settings.Default.export_includeTypeInExport;
 			bool exportAsArray = Properties.Settings.Default.export_exportAsArray;
 
+			bool isFileTypeInName(string input)
+			{
+				string sub = input.Substring(input.Length - 4);
+				if (sub == "anim" || sub == "clip" || sub == "expr") { return true; }
+				return false;
+			}
+
 			void write()
 			{
 				try
 				{
+					// What a ugly mess...
+
 					using (StreamWriter sw = File.CreateText(file))
 					{
 						sw.WriteLine(fileName);
 						sw.WriteLine("\n");
-						for (int i = 0; i < animationList.Items.Count; i++)
+						for (int i = 0; i < parsedAnims.Count; i++)
 						{
+							string animName = parsedAnims[i].ToString();
+							bool typeInName = isFileTypeInName(animName);
+
 							if (includeFileType && exportAsArray)
 							{
-								if (i + 1 == animationList.Items.Count)
-									sw.Write("\"" + animationList.Items[i].ToString() + "\"");
+								if (i + 1 == parsedAnims.Count)
+									sw.Write("\"" + animName + "\"");
 								else
-									sw.Write("\"" + animationList.Items[i].ToString() + "\", ");
+									sw.Write("\"" + animName + "\", ");
 							}
 
 							else if (includeFileType && !exportAsArray)
 							{
-								sw.WriteLine(animationList.Items[i].ToString());
+								sw.WriteLine(animName);
 							}
 
 							else if (!includeFileType && exportAsArray)
 							{
-								if (i + 1 == animationList.Items.Count)
-									sw.Write("\"" + animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5) + "\"");
+								if (i + 1 == parsedAnims.Count)
+								{
+									if (typeInName)
+										sw.Write("\"" + animName.Substring(0, animName.Length - 5) + "\"");
+									else
+										sw.Write("\"" + animName + "\"");
+								}
 								else
-									sw.Write("\"" + animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5) + "\", ");
+								{
+									if (typeInName)
+										sw.Write("\"" + animName.Substring(0, animName.Length - 5) + "\", ");
+									else
+										sw.Write("\"" + animName + "\", ");
+								}
 							}
 
 							else if (!includeFileType && !exportAsArray)
 							{
-								sw.WriteLine(animationList.Items[i].ToString().Substring(0, animationList.Items[i].ToString().Length - 5));
+								if (typeInName)
+									sw.WriteLine(animName.Substring(0, animName.Length - 5));
+								else
+									sw.WriteLine(animName);
 							}
 						}
 
